@@ -1,0 +1,33 @@
+{
+  "name": "agent-sandbox-examples-typescript",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Runnable TypeScript examples for AI agent sandboxes on Northflank: create a sandbox, run code, connect an agent, run sandboxes in parallel, persist files, monitor usage, and secure networking.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.9"
+  },
+  "scripts": {
+    "first-sandbox": "tsx --env-file-if-exists=.env src/01-first-sandbox.ts",
+    "run-code": "tsx --env-file-if-exists=.env src/02-run-code.ts",
+    "lifecycle": "tsx --env-file-if-exists=.env src/03-lifecycle.ts",
+    "agent": "tsx --env-file-if-exists=.env src/04-agent.ts",
+    "parallel": "tsx --env-file-if-exists=.env src/05-parallel.ts",
+    "persistent-volume": "tsx --env-file-if-exists=.env src/06-persistent-volume.ts",
+    "monitoring": "tsx --env-file-if-exists=.env src/07-monitoring.ts",
+    "networking": "tsx --env-file-if-exists=.env src/08-networking.ts",
+    "cleanup": "tsx --env-file-if-exists=.env src/cleanup.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.137.0",
+    "@northflank/js-client": "^0.11.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  }
+}

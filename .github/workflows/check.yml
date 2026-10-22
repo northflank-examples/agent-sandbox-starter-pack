@@ -1,0 +1,45 @@
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Typecheck TypeScript examples
+        working-directory: examples/typescript
+        run: npm ci && npm run typecheck
+      - name: Check Python examples
+        run: |
+          pip install -r examples/python/requirements.txt
+          python -m py_compile examples/python/*.py
+
+  links:
+    # Separate job with no npm install, so third-party READMEs in
+    # node_modules are never scanned.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Markdown links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --exclude-path node_modules
+            --exclude 'app\.northflank\.com'
+            --exclude 'console\.anthropic\.com'
+            --exclude 'npmjs\.com'
+            --exclude 'genai\.owasp\.org'
+            './**/*.md'
+          fail: true

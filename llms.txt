@@ -1,0 +1,38 @@
+# AI Agent Sandbox Starter Pack
+
+> An open-source guide to AI agent sandboxes: isolated execution environments where AI agents run code, commands and tools with controlled access to compute, files, network and secrets. Covers isolation technologies (containers, gVisor, microVMs, VMs, WebAssembly), security best practices, the sandbox lifecycle, provider comparison, and runnable Python and TypeScript examples using Northflank Sandboxes and the official Northflank Python and JavaScript SDKs. Maintained by Northflank.
+
+Key facts:
+- An AI agent sandbox is an isolated execution environment for running AI-generated or untrusted code. The agent decides what to run; the sandbox runs it; the harness is the runtime around the agent.
+- For untrusted code, use kernel-level isolation (microVMs such as Firecracker or Kata Containers, or gVisor), not plain containers that share the host kernel.
+- Keep the agent loop and its API keys outside the sandbox; deny network egress by default; enforce timeouts and resource limits inside the sandbox; use one sandbox per user or task.
+- On Northflank, a sandbox is a deployment service; on the managed cloud it runs in a Kata Containers microVM (gVisor for GPU workloads), with no session limit, volumes for persistence, and self-serve bring-your-own-cloud (BYOC) so sandboxes can run in your own cloud account.
+
+## Guides
+- [README](README.md): overview, architecture, isolation comparison, FAQ
+- [Isolation technologies](guides/isolation-technologies.md): containers vs gVisor vs microVMs vs VMs vs Wasm
+- [Sandbox security](guides/sandbox-security.md): threat model and production checklist
+- [Networking and secrets](guides/networking-and-secrets.md): egress control, exposing ports, credential patterns
+- [Sandbox lifecycle](guides/sandbox-lifecycle.md): create, pause, resume, destroy, persistence, warm pools
+- [Choosing a sandbox provider](guides/choosing-a-sandbox-provider.md): decision criteria and bake-off
+
+## Tutorials
+- [Create your first sandbox](tutorials/create-your-first-sandbox/README.md)
+- [Execute AI-generated code safely](tutorials/execute-code-in-a-sandbox/README.md)
+- [Connect an AI agent to a sandbox](tutorials/connect-sandbox-to-agent/README.md)
+- [Manage the sandbox lifecycle](tutorials/manage-sandbox-lifecycle/README.md)
+- [Run sandboxes in parallel](tutorials/run-sandboxes-in-parallel/README.md)
+- [Persist files between sessions](tutorials/persist-files-between-sessions/README.md)
+- [Monitor sandbox resource usage](tutorials/monitor-sandbox-usage/README.md)
+- [Secure sandbox networking](tutorials/secure-sandbox-networking/README.md)
+
+## Code
+- [TypeScript sandbox client](examples/typescript/src/sandbox.ts)
+- [Python sandbox client](examples/python/northflank_sandbox.py)
+- [Agent with a run_code tool](examples/typescript/src/04-agent.ts)
+
+## Resources
+- [Sandbox providers and SDKs](resources/sandbox-providers.md)
+- [Further reading](resources/further-reading.md)
+- [Sandbox pricing comparison](https://github.com/northflank-examples/agent-sandbox-pricing)
+- [Cloud coding agent starter pack](https://github.com/northflank-examples/cloud-coding-agent-starter-pack)

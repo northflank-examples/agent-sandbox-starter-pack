@@ -1,0 +1,2 @@
+northflank==2.1.0
+anthropic>=1.17   # only for agent.py
